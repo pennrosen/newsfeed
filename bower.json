@@ -1,0 +1,10 @@
+{
+  "name": "dsg-workflow",
+  "version": "0.0.1",
+  "devDependencies": {
+    "gsap": "~1.16.1",
+    "jquery": "1.7.1",
+    "ScrollMagic": "~2.0.3"
+  },
+  "dependencies": {}
+}

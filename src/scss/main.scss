@@ -1,0 +1,30 @@
+// main.scss
+// --------------------------------------------------
+// No styling in this file, only imports
+//
+// Breaking apart the styles into different partials makes them:
+// * more modular
+// * easier to read
+// * easier to troubleshoot
+// * more semantic
+
+// Modules and Global Variables
+@import 'partials/base';
+
+// Editorial-specific Variables
+@import 'partials/variables';
+
+// Base Layout
+@import 'partials/article';
+@import 'partials/section';
+// @import 'partials/header';
+// @import 'partials/nav';
+
+// Typography
+// @import 'partials/typography';
+
+// Custom Elements
+// @import 'partials/your-custom-element-here';
+
+// Shameful Code
+// @import 'partials/hacks';

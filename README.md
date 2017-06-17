@@ -1,5 +1,8 @@
 # newsfeed
 
+Prompt
+---
+
 Given a jsonp file that gives you a list of stories, headlines, summaries and photos, create a static webpage that does the following:
 
 1. Performs a client side request to fetch the contents of this JSONP file.
@@ -12,3 +15,7 @@ Given a jsonp file that gives you a list of stories, headlines, summaries and ph
 	- every word three characters or less is left alone
 	- every word more than three characters is replaced with boinga.
 	- maintain the same capitalization and punctuation in the English and Martian Versions.
+
+To Build
+---
+http://localhost:3000/build/index.html
