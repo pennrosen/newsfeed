@@ -1,5 +1,5 @@
 {
-  "name": "dsg-workflow",
+  "name": "workflow",
   "version": "0.0.1",
   "devDependencies": {
     "gsap": "~1.16.1",

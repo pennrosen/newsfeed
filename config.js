@@ -50,6 +50,9 @@ module.exports = {
             // ScrollToPlugin.js
 			// './src/plugins/scrollmagic.sticky-nav.js',
 
+			// Temporary local JSONP
+			'./src/js/nyregion.js' 
+			
 			// App File (must be included)
 			'./src/js/app.js' 
 		] ,

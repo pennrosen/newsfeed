@@ -1,50 +1,49 @@
 $(document).ready(function(){
-    
-    // set a duration for all tweens
-    var globalTweenTime = 1.2;
-    var navHeight = $('#newsfeed-wrapper nav').height();
 
-    // init Scroll Magic controller
-    // only one controller is needed per scroll container (default container: window)
-    var scrollController = new ScrollMagic.Controller();
+	var header = document.querySelector('header');
+	var columnA = document.querySelector('.column-a');
+	var requestURL = '../src/js/nyregion.json';
+	var request = new XMLHttpRequest();
+	request.open('GET', requestURL);
+	request.responseType = 'text';
+	request.send();
 
-    // changes behaviour of controller from instant jump to animated scroll
-    scrollController.scrollTo(function (newpos, scrollduration) {
+	request.onload = function() {
+		var nyRegionText = request.response;
+		var nyRegion = JSON.parse(nyRegionText);
+		populateColumns(nyRegion);
+	}
 
-        // if back to top, no nav height offset
-        if (newpos == 0) {
-            var offset = 0;
-        } else {
-            var offset = navHeight;
-        };
-         
-        // animate scroll
-        // autoKill: false prevents a safari/iOS bug
-        // http://greensock.com/forums/topic/7205-scrollto-bug-in-182-in-safari-602-mountain-lion/page-2
-        TweenLite.to(window, scrollduration, {
-            scrollTo: {y: (newpos - offset), autoKill: false}, 
-            ease: Power3.easeInOut
-        });
+	function populateColumns(jsonObj) {
+		var page = jsonObj['page'];
+		var columnAtext = page.content[1];
+		var columnBtext = page.content[2];
+		var columnCtext = page.content[3];
+		var columns = [columnAtext, columnBtext, columnCtext];
 
-    });
+		for(i = 0; i < columns.length; i++) {
+			var mySection = document.createElement('section');
+			var myH2 = document.createElement('h2');
+			var myPara1 = document.createElement('p');
+			var myPara2 = document.createElement('p');
 
-    // bind scroll to anchor links
-    // this regex matches all hrefs that are '#'
-    $(document).on("click", "a[href='#']", function (e) {
-        e.preventDefault();
-        
-        var id = $(this).attr("href");
+			var stories = [];
+			var collections = columns[i].collections;
 
-        // back to top
-        if (id == '#') {
-            scrollController.scrollTo(0, globalTweenTime);
-        }
+			for (var i = 0; i < collections.length; i++) {
+				var story = collections[i];
+				stories.push(story);
+			}
 
-        // if element with id exists 
-        if ($(id).length > 0) {
-            scrollController.scrollTo(id, globalTweenTime);
-        }
+			myH2.textContent = stories[0]['assets'][0]['headline'];
+			myPara1.textContent = stories[0]['assets'][0]['byline'];
+			myPara2.textContent = stories[0]['assets'][0]['url'];
 
-    });
+			mySection.appendChild(myH2);
+			mySection.appendChild(myPara1);
+			mySection.appendChild(myPara2);
+			columnA.appendChild(mySection);
+		}
+	}
 
 });
